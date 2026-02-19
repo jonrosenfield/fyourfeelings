@@ -202,44 +202,9 @@ const FyfYouTube = (() => {
       container.innerHTML = shorts.map(renderShortCard).join('');
       console.log(`[FYF YT] Successfully rendered ${shorts.length} items core.`);
 
-      // --- Mobile: tap detection on the scroll container ---
-      // Cards have pointer-events:none on mobile so the browser gets
-      // 100% native scroll. We detect taps here and use elementFromPoint
-      // to find which card was under the finger.
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let isTouchDevice = false;
-      const TAP_THRESHOLD = 12;
-
-      container.addEventListener('touchstart', (e) => {
-        isTouchDevice = true;
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-
-      container.addEventListener('touchend', (e) => {
-        const touch = e.changedTouches[0];
-        const dx = Math.abs(touch.clientX - touchStartX);
-        const dy = Math.abs(touch.clientY - touchStartY);
-
-        if (dx < TAP_THRESHOLD && dy < TAP_THRESHOLD) {
-          // Briefly re-enable pointer-events so elementFromPoint can see cards
-          const cards = container.querySelectorAll('.clip-card');
-          cards.forEach(c => c.style.pointerEvents = 'auto');
-
-          const el = document.elementFromPoint(touch.clientX, touch.clientY);
-          const card = el?.closest('.clip-card');
-
-          // Restore pointer-events:none
-          cards.forEach(c => c.style.pointerEvents = '');
-
-          if (card?.dataset.videoId) openModal(card.dataset.videoId);
-        }
-      }, { passive: true });
-
-      // --- Desktop: normal click (cards have pointer-events on desktop) ---
+      // Simple delegated click — works on both mobile and desktop.
+      // Native scroll handles swiping; browser only fires click on taps.
       container.addEventListener('click', (e) => {
-        if (isTouchDevice) return;
         const card = e.target.closest('.clip-card');
         if (card?.dataset.videoId) openModal(card.dataset.videoId);
       });

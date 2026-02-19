@@ -58,7 +58,11 @@ body {
   line-height: 1.65;
   background: var(--bg-void);
   color: var(--text-primary);
-  overflow-x: hidden;
+  /* overflow-x:clip hides horizontal overflow (like overflow-x:hidden)
+     but does NOT create a scroll-trapping context, so nested
+     overflow-x:auto containers (like the shorts carousel) can still
+     scroll horizontally on mobile. */
+  overflow-x: clip;
   -webkit-font-smoothing: none;
   image-rendering: pixelated;
 }

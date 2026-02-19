@@ -56,6 +56,7 @@
     object-fit: cover;
     transition: transform var(--duration-base, 0.3s) ease;
     opacity: 0.9;
+    /* Prevent native image drag that blocks swipe on mobile */
     -webkit-user-drag: none;
     user-select: none;
     -webkit-touch-callout: none;
@@ -127,7 +128,7 @@
 }
 
 
-/* ── MOBILE OPTIMIZATION ────────────────────────────────── */
+/* ── MOBILE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
     .clips-scroll {
         gap: 1rem;
@@ -146,15 +147,9 @@
         flex: 0 0 72vw;
         max-width: 280px;
         scroll-snap-align: center;
-        /* Kill ALL touch interactivity on the card itself.
-           Touches fall straight through to .clips-scroll,
-           giving the browser 100% native scroll control.
-           Taps are handled separately in JS. */
-        pointer-events: none;
-        -webkit-user-select: none;
-        user-select: none;
     }
 
+    /* Play button always visible on touch (no hover) */
     .clip-card__play-btn {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
@@ -167,10 +162,15 @@
         height: 26px;
     }
 
+    /* Disable hover effects on touch */
     .clip-card:hover {
         transform: none;
         box-shadow: none;
         border-color: var(--border);
+    }
+
+    .clip-card:hover .clip-card__thumbnail {
+        transform: none;
     }
 
     .clip-card__body {
