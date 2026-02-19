@@ -118,6 +118,16 @@ body::after {
   mix-blend-mode: overlay;
 }
 
+/* Disable VHS/CRT overlays on touch devices — fixed overlays
+   at z-index 9999 block touch-scroll on horizontal carousels
+   in mobile Safari & Chrome, even with pointer-events:none. */
+@media (max-width: 768px) {
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
 /* ── Accessibility ───────────────────────────────────────── */
 .sr-only {
   position: absolute;
