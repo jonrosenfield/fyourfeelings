@@ -56,9 +56,9 @@
     object-fit: cover;
     transition: transform var(--duration-base, 0.3s) ease;
     opacity: 0.9;
-    /* Prevent native image drag on all platforms */
     -webkit-user-drag: none;
     user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .clip-card:hover .clip-card__thumbnail {
@@ -127,18 +127,15 @@
 }
 
 
-/* ── MOBILE SWIPE OPTIMIZATION ──────────────────────────── */
+/* ── MOBILE OPTIMIZATION ────────────────────────────────── */
 @media (max-width: 768px) {
     .clips-scroll {
         gap: 1rem;
         padding-left: var(--gutter, 1.25rem);
         padding-right: var(--gutter, 1.25rem);
         scroll-snap-type: x proximity;
-        /* Hide scrollbar — swipe is the interaction */
         scrollbar-width: none;
         -ms-overflow-style: none;
-        /* Allow both horizontal scroll AND vertical page scroll */
-        touch-action: manipulation;
     }
 
     .clips-scroll::-webkit-scrollbar {
@@ -149,22 +146,15 @@
         flex: 0 0 72vw;
         max-width: 280px;
         scroll-snap-align: center;
-        /* Prevent long-press context menu & text selection while swiping */
-        -webkit-touch-callout: none;
+        /* Kill ALL touch interactivity on the card itself.
+           Touches fall straight through to .clips-scroll,
+           giving the browser 100% native scroll control.
+           Taps are handled separately in JS. */
+        pointer-events: none;
         -webkit-user-select: none;
         user-select: none;
-        touch-action: manipulation;
     }
 
-    /* All child elements pass touch through to the scroll container */
-    .clip-card__media,
-    .clip-card__thumbnail,
-    .clip-card__play-btn,
-    .clip-card__play-btn svg {
-        pointer-events: none;
-    }
-
-    /* Play button always visible on touch (no hover) */
     .clip-card__play-btn {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
@@ -177,10 +167,10 @@
         height: 26px;
     }
 
-    /* Disable hover lift on touch — causes jank while swiping */
     .clip-card:hover {
         transform: none;
-        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+        box-shadow: none;
+        border-color: var(--border);
     }
 
     .clip-card__body {
