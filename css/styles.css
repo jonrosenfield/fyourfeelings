@@ -1324,6 +1324,45 @@ body::after {
   box-shadow: 4px 4px 0 #000;
 }
 
+.cta-success {
+  padding: 2.5rem 2rem;
+  border: 4px solid var(--accent-green);
+  background: var(--bg-card);
+  box-shadow: 8px 8px 0 rgba(57, 255, 20, 0.2);
+  margin-top: 1.5rem;
+  animation: glitchFadeIn 0.5s var(--ease-out-expo) forwards;
+}
+
+.success-icon {
+  margin-bottom: 1.25rem;
+}
+
+.success-title {
+  font-family: 'VT323', monospace;
+  font-size: 2.25rem;
+  color: var(--accent-green);
+  margin-bottom: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.success-msg {
+  color: #adb5bd;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+@keyframes glitchFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .cta-card__social {
   display: flex;
   flex-direction: column;
