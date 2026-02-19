@@ -98,7 +98,7 @@ const FyfYouTube = (() => {
       const entries = Array.from(xml.getElementsByTagName('entry'));
 
       if (entries.length === 0) {
-        // Double check if corsproxy wrapped it in JSON (unlikely for corsproxy.io but good safety)
+        // Double check if proxy wrapped it in JSON (unlikely for current setup but good safety)
         try {
           const json = JSON.parse(xmlText);
           if (json.contents) {

@@ -147,7 +147,7 @@ const FyfRSS = (() => {
       return cached;
     }
     console.log('[FYF RSS] Fetching live feed via proxy…');
-    const response = await fetch(`${PROXY_URL}${encodeURIComponent(FEED_URL)}`, {
+    const response = await fetch(PROXY_URL, {
       headers: { Accept: 'application/rss+xml, application/xml, text/xml' },
     });
     if (!response.ok) throw new Error(`RSS fetch failed: ${response.status}`);
