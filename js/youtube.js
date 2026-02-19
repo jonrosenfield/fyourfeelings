@@ -139,8 +139,7 @@ const FyfYouTube = (() => {
   function renderShortCard(short) {
     return `
             <div class="clip-card" data-video-id="${short.videoId}">
-                <div class="clip-card__media">
-                    <img src="${short.thumbnail}" class="clip-card__thumbnail" alt="${FyfRSS.escapeHtml(short.title)}" loading="lazy">
+                <div class="clip-card__media" style="background-image:url('${short.thumbnail}')" role="img" aria-label="${FyfRSS.escapeHtml(short.title)}">
                     <div class="clip-card__play-btn">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8 5v14l11-7z" />
