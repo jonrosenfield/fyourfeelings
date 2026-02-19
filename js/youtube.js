@@ -6,9 +6,10 @@
 const FyfYouTube = (() => {
   const CHANNEL_ID = 'UCoaVAK7NqklDQhVaoLjTvrw';
   const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
-  const PROXY_URL = 'https://api.allorigins.win/raw?url=';
+  const PROXY_URL = '/api/yt';
 
   const FALLBACK_SHORTS = [
+    // ... (omitting for brevity in thought, but tool will use full content)
     {
       videoId: 'Bv1RVmfe_E0',
       title: "Ski Jumpers Were Injecting Themselves for Olympic Gold",

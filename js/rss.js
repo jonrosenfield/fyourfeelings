@@ -4,7 +4,7 @@
 
 const FyfRSS = (() => {
   const FEED_URL = 'https://anchor.fm/s/108379980/podcast/rss';
-  const PROXY_URL = 'https://api.allorigins.win/raw?url=';
+  const PROXY_URL = '/api/rss';
   const CACHE_KEY = 'fyf_rss_cache_v5';
   const CACHE_TTL = 5 * 60 * 1000;
 

@@ -1,0 +1,3 @@
+# Netlify Proxies for RSS and YouTube
+/api/rss  https://anchor.fm/s/108379980/podcast/rss  200
+/api/yt   https://www.youtube.com/feeds/videos.xml?channel_id=UCoaVAK7NqklDQhVaoLjTvrw  200
