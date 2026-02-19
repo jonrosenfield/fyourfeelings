@@ -6,7 +6,7 @@
 const FyfYouTube = (() => {
   const CHANNEL_ID = 'UCoaVAK7NqklDQhVaoLjTvrw';
   const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
-  const PROXY_URL = 'https://corsproxy.io/?';
+  const PROXY_URL = 'https://api.allorigins.win/raw?url=';
 
   const FALLBACK_SHORTS = [
     {

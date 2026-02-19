@@ -8,7 +8,7 @@ const SpotifyModule = (() => {
   // Spotify API Configuration
   const PODCAST_ID = '08Ms4yr3c3WEE0YSSQlZir'; // F Your Feelings Podcast Spotify ID
   const RSS_FEED_URL = 'https://anchor.fm/s/108379980/podcast/rss';
-  const CORS_PROXY = 'https://corsproxy.io/?'; // CORS proxy for RSS
+  const CORS_PROXY = 'https://api.allorigins.win/raw?url='; // CORS proxy for RSS
 
   // Cache configuration
   const CACHE_KEY = 'fyf_episodes_cache';
