@@ -9,7 +9,6 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    /* Allow cards to peek from edges on mobile */
     scroll-padding-left: var(--gutter, 1.25rem);
 }
 
@@ -57,6 +56,9 @@
     object-fit: cover;
     transition: transform var(--duration-base, 0.3s) ease;
     opacity: 0.9;
+    /* Prevent native image drag on all platforms */
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .clip-card:hover .clip-card__thumbnail {
@@ -93,7 +95,6 @@
     width: 32px;
     height: 32px;
     margin-left: 4px;
-    /* Optical center adjustment */
 }
 
 .clip-card__body {
@@ -129,18 +130,15 @@
 /* ── MOBILE SWIPE OPTIMIZATION ──────────────────────────── */
 @media (max-width: 768px) {
     .clips-scroll {
-        /* Smaller gap so more of next card peeks */
         gap: 1rem;
-        /* Pad left so first card doesn't start at screen edge */
         padding-left: var(--gutter, 1.25rem);
         padding-right: var(--gutter, 1.25rem);
-        /* Smoother snap — proximity allows partial swipes */
         scroll-snap-type: x proximity;
-        /* Hide scrollbar on mobile — swipe is the interaction */
+        /* Hide scrollbar — swipe is the interaction */
         scrollbar-width: none;
         -ms-overflow-style: none;
-        /* Tell browser horizontal swipe = scroll, not gesture */
-        touch-action: pan-x;
+        /* Allow both horizontal scroll AND vertical page scroll */
+        touch-action: manipulation;
     }
 
     .clips-scroll::-webkit-scrollbar {
@@ -148,15 +146,25 @@
     }
 
     .clip-card {
-        /* Size cards to show ~75% of card + peek of next one */
         flex: 0 0 72vw;
         max-width: 280px;
         scroll-snap-align: center;
-        /* Allow horizontal swipe to pass through to scroll container */
-        touch-action: pan-x;
+        /* Prevent long-press context menu & text selection while swiping */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        touch-action: manipulation;
     }
 
-    /* Play button always visible on touch (no hover state) */
+    /* All child elements pass touch through to the scroll container */
+    .clip-card__media,
+    .clip-card__thumbnail,
+    .clip-card__play-btn,
+    .clip-card__play-btn svg {
+        pointer-events: none;
+    }
+
+    /* Play button always visible on touch (no hover) */
     .clip-card__play-btn {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
@@ -169,7 +177,7 @@
         height: 26px;
     }
 
-    /* Disable hover lift on touch — it causes jank while swiping */
+    /* Disable hover lift on touch — causes jank while swiping */
     .clip-card:hover {
         transform: none;
         box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
@@ -190,7 +198,6 @@
     }
 
     .clip-card {
-        /* On very small screens, show ~80% of card so next one peeks */
         flex: 0 0 75vw;
         max-width: 260px;
     }

@@ -202,41 +202,36 @@ const FyfYouTube = (() => {
       container.innerHTML = shorts.map(renderShortCard).join('');
       console.log(`[FYF YT] Successfully rendered ${shorts.length} items core.`);
 
-      // Touch-aware click handling — only open modal on taps, not swipes
+      // Touch-aware tap vs swipe detection
       let touchStartX = 0;
       let touchStartY = 0;
-      let touchStartTime = 0;
-      const SWIPE_THRESHOLD = 10; // px of movement before it's a swipe, not a tap
+      let isTouchDevice = false;
+      const SWIPE_THRESHOLD = 10;
 
       container.addEventListener('touchstart', (e) => {
+        isTouchDevice = true;
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
       }, { passive: true });
 
       container.addEventListener('touchend', (e) => {
         const touch = e.changedTouches[0];
         const dx = Math.abs(touch.clientX - touchStartX);
         const dy = Math.abs(touch.clientY - touchStartY);
-        const dt = Date.now() - touchStartTime;
 
-        // Only treat as tap if minimal movement and short duration
-        if (dx < SWIPE_THRESHOLD && dy < SWIPE_THRESHOLD && dt < 400) {
-          const card = touch.target.closest('.clip-card');
-          if (card?.dataset.videoId) {
-            openModal(card.dataset.videoId);
-          }
+        // Only open modal on clean taps (minimal finger movement)
+        if (dx < SWIPE_THRESHOLD && dy < SWIPE_THRESHOLD) {
+          const card = (touch.target.closest && touch.target.closest('.clip-card')) || touch.target;
+          const videoId = card?.dataset?.videoId;
+          if (videoId) openModal(videoId);
         }
       }, { passive: true });
 
-      // Desktop click fallback (mouse users)
+      // Desktop: use click. On touch devices the touchend handler above covers it.
       container.addEventListener('click', (e) => {
-        // Ignore if this was a touch event (already handled above)
-        if (e.sourceCapabilities?.firesTouchEvents) return;
+        if (isTouchDevice) return;
         const card = e.target.closest('.clip-card');
-        if (card?.dataset.videoId) {
-          openModal(card.dataset.videoId);
-        }
+        if (card?.dataset.videoId) openModal(card.dataset.videoId);
       });
 
     } else {
