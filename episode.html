@@ -260,7 +260,7 @@
                             
                             <!-- YouTube Button -->
                             ${(() => {
-                        const videoData = FyfYouTube.getVideoIdForEpisode(episode.epNum);
+                        const videoData = FyfYouTube.getVideoIdForEpisode(episode.epNum, episode.guid);
                         return videoData ? FyfYouTube.buildYouTubeButton(videoData) : '';
                     })()}
 

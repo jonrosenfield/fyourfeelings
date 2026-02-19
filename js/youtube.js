@@ -211,13 +211,11 @@ const FyfYouTube = (() => {
   // Episode number to YouTube video ID mapping
   // IDs fetched from FYF YouTube Playlist
   const EPISODE_VIDEOS = {
-    19: '6PQlaIsVCU8', // Olympics PENISGATE
-    18: 'CdysTeU55mM', // NIL Deal
-    17: 'tK1YM-ZDS4I', // Elon Musk AI
-    16: 'qt84o9dXIPk', // Britney Spirals
-    15.5: { id: 'qt84o9dXIPk', start: 1155 }, // Episode 15 Part 2 (Britney Spirals)
-    15: 'mxQ7-OqcMsI', // Indiana
-    14: 'ZxA2lV91Cb0', // You’ve Been Doing It Wrong
+    18: '6PQlaIsVCU8', // Olympics PENISGATE
+    17: 'CdysTeU55mM', // NIL Deal
+    16: 'tK1YM-ZDS4I', // Elon Musk AI
+    15: 'mxQ7-OqcMsI', // Indiana (Part 1)
+    14: 'ZxA2lV91Cb0', // You've Been Doing It Wrong
     13: 'xJC-tnep94c', // Britney Spears Shirt
     12: 'DLHQ5I2ppLU', // Miami Hurricanes
     11: 'LD5asGZWdyc', // Eric's Post-Surgery
@@ -233,7 +231,15 @@ const FyfYouTube = (() => {
     1: 'SIiZjncgPog', // Dolphins Disaster
   };
 
-  function getVideoIdForEpisode(episodeNum) {
+  // GUID-based mapping for split episodes (e.g. Episode 15 Part 2)
+  // This handles cases where multiple RSS entries share the same epNum
+  const GUID_VIDEOS = {
+    'af893f6c-739c-4e51-ab23-3e4e8293c92f': 'qt84o9dXIPk', // Ep 15 Part 2 — Britney Spirals
+  };
+
+  function getVideoIdForEpisode(episodeNum, guid) {
+    // Check GUID first (handles split episodes)
+    if (guid && GUID_VIDEOS[guid]) return GUID_VIDEOS[guid];
     const num = Number(episodeNum);
     return EPISODE_VIDEOS[num] || null;
   }

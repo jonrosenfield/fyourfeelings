@@ -347,7 +347,7 @@ const SpotifyModule = (() => {
           
           ${(() => {
         if (typeof FyfYouTube !== 'undefined') {
-          const videoId = FyfYouTube.getVideoIdForEpisode(episode.epNum);
+          const videoId = FyfYouTube.getVideoIdForEpisode(episode.epNum, episode.guid);
           if (videoId) {
             return `<a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" class="episode-play-btn" style="background: #FF0000; border-color: #FF0000; color: white; text-decoration: none;">📺 Watch</a>`;
           }
