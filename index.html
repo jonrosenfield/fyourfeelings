@@ -309,6 +309,17 @@
               <input type="email" name="email" placeholder="Your email address" required>
               <button type="submit">JOIN THE CIRCLE</button>
             </form>
+
+            <div id="newsletter-success" class="cta-success" style="display: none;">
+              <div class="success-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3 class="success-title">YOU'RE IN THE CIRCLE.</h3>
+              <p class="success-msg">Check your inbox for the latest unfiltered drops.</p>
+            </div>
           </div>
           <div class="cta-card__social">
             <a href="https://open.spotify.com/show/08Ms4yr3c3WEE0YSSQlZir" class="btn-primary" target="_blank"
@@ -401,9 +412,9 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/rss.js?v=7"></script>
-  <script src="js/youtube.js?v=7"></script>
-  <script src="js/player.js?v=7"></script>
+  <script src="js/rss.js?v=8"></script>
+  <script src="js/youtube.js?v=8"></script>
+  <script src="js/player.js?v=8"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       const loadingScreen = document.getElementById('loading-screen');
@@ -526,6 +537,39 @@
         displayedCount += 6;
         renderEpisodes();
       });
+
+      // ── Newsletter Form Handler ──────────────────────────
+      const newsletterForm = document.querySelector('.cta-form[name="newsletter"]');
+      const newsletterSuccess = document.getElementById('newsletter-success');
+
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = newsletterForm.querySelector('button');
+          const originalText = btn.textContent;
+          btn.textContent = 'JOINING...';
+          btn.disabled = true;
+
+          try {
+            const formData = new FormData(newsletterForm);
+            // Add honeypot/bot field manually if needed, but for simple fetch:
+            await fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: new URLSearchParams(formData).toString(),
+            });
+
+            newsletterForm.style.display = 'none';
+            newsletterSuccess.style.display = 'block';
+            newsletterSuccess.classList.add('fade-up', 'in-view');
+          } catch (err) {
+            console.error('Newsletter submission failed:', err);
+            btn.textContent = originalText;
+            btn.disabled = false;
+            alert('Failed to join. Please try again or refresh.');
+          }
+        });
+      }
     });
   </script>
 </body>
