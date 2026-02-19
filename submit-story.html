@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Your Story - F Your Feelings Podcast</title>
+  <meta name="description"
+    content="Share your story with F Your Feelings Podcast. Record, upload, or write your confession and it might get featured on the show.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fyourfeelingspod.com/submit-story.html">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W07VPHENS0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-W07VPHENS0');
+  </script>
+
+  <style>
+    /* ── Submit Page Override ──────────────────────────────── */
+    .submit-page {
+      min-height: 100svh;
+      padding-top: 80px;
+      background:
+        linear-gradient(135deg, rgba(57, 255, 20, 0.04) 0%, transparent 50%),
+        linear-gradient(rgba(8, 8, 8, 0.96), rgba(8, 8, 8, 0.96)),
+        url('images/fyourfeelingshero.png') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Retro grid overlay */
+    .submit-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(57, 255, 20, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 255, 20, 0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+    }
+
+    .submit-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: calc(100svh - 80px);
+    }
+
+    /* ── LEFT: Copywriting Panel ──────────────────────────── */
+    .submit-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 4rem) clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 3rem);
+      border-right: 1px solid rgba(57, 255, 20, 0.15);
+    }
+
+    .submit-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      text-shadow: 0 0 10px var(--accent-green);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .submit-eyebrow::before {
+      content: '▶';
+      font-size: 0.5rem;
+    }
+
+    .submit-headline {
+      font-family: var(--font-pixel);
+      font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.3;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .submit-headline em {
+      color: var(--accent-green);
+      font-style: normal;
+      text-shadow: 0 0 20px var(--accent-green), 3px 3px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .submit-desc {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 42ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .submit-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+
+    .submit-perk {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .submit-perk__icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      margin-top: -2px;
+    }
+
+    /* ── RIGHT: Form Panel ───────────────────────────────── */
+    .submit-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 3rem) clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 4rem);
+      background: rgba(8, 8, 8, 0.5);
+    }
+
+    .form-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.875rem;
+      border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+    }
+
+    /* ── Submission Type Tabs ────────────────────────────── */
+    .type-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .type-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      padding: 0.75rem 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      border: none;
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .type-tab:last-child {
+      border-right: none;
+    }
+
+    .type-tab__icon {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .type-tab:hover {
+      color: var(--accent-green);
+      background: rgba(57, 255, 20, 0.06);
+    }
+
+    .type-tab.active {
+      color: #000;
+      background: var(--accent-green);
+    }
+
+    .type-tab.active::after {
+      content: '▼';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.5rem;
+      color: var(--accent-green);
+      z-index: 2;
+    }
+
+    /* ── Dynamic Panels ─────────────────────────────────── */
+    .type-panel {
+      display: none;
+      margin-bottom: 1.25rem;
+      animation: panel-in 0.25s ease;
+    }
+
+    .type-panel.active {
+      display: block;
+    }
+
+    @keyframes panel-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Form Fields ─────────────────────────────────────── */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .fg {
+      margin-bottom: 1.1rem;
+    }
+
+    .fg label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .fg input,
+    .fg textarea,
+    .fg select {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-bottom: 2px solid rgba(57, 255, 20, 0.3);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.65rem 0.875rem;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0;
+    }
+
+    .fg input::placeholder,
+    .fg textarea::placeholder {
+      color: var(--text-dim);
+    }
+
+    .fg input:focus,
+    .fg textarea:focus,
+    .fg select:focus {
+      border-color: var(--accent-green);
+      background: rgba(57, 255, 20, 0.03);
+    }
+
+    .fg select option {
+      background: var(--bg-card);
+    }
+
+    .fg textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .char-counter {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      text-align: right;
+      margin-top: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .char-counter.warn {
+      color: var(--accent-amber);
+    }
+
+    .char-counter.max {
+      color: var(--accent-red);
+    }
+
+    /* ── Record UI ──────────────────────────────────────── */
+    .record-ui {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-bottom: 2px solid rgba(57, 255, 20, 0.3);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .record-timer {
+      font-family: var(--font-vt);
+      font-size: 2rem;
+      color: var(--accent-green);
+      letter-spacing: 0.15em;
+      text-shadow: 0 0 12px var(--accent-green);
+      display: none;
+    }
+
+    .record-timer.active {
+      display: block;
+    }
+
+    .waveform-canvas {
+      width: 100%;
+      height: 48px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .waveform-canvas.active {
+      display: block;
+    }
+
+    .record-controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .btn-record {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.75rem 1rem;
+      background: var(--accent-green);
+      color: #000;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 #000;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-record.recording {
+      background: var(--accent-red);
+      border-color: #000;
+      animation: pulse-record 1.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-record {
+
+      0%,
+      100% {
+        box-shadow: 3px 3px 0 #000;
+      }
+
+      50% {
+        box-shadow: 3px 3px 0 #000, 0 0 18px rgba(255, 45, 85, 0.6);
+      }
+    }
+
+    .btn-record:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .btn-record:active {
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .btn-record-discard {
+      display: none;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.75rem 1rem;
+      background: transparent;
+      color: var(--accent-red);
+      border: 1px solid rgba(255, 45, 85, 0.4);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-record-discard:hover {
+      background: rgba(255, 45, 85, 0.1);
+      border-color: var(--accent-red);
+    }
+
+    .record-playback {
+      width: 100%;
+      display: none;
+      outline: none;
+    }
+
+    /* style the native audio element a bit */
+    .record-playback::-webkit-media-controls-panel {
+      background: var(--bg-elevated);
+    }
+
+    .record-status {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    /* ── File Upload ─────────────────────────────────────── */
+    .file-drop {
+      border: 2px dashed rgba(57, 255, 20, 0.3);
+      background: var(--bg-card);
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .file-drop:hover,
+    .file-drop.drag-over {
+      border-color: var(--accent-green);
+      background: rgba(57, 255, 20, 0.04);
+    }
+
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .file-drop__icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .file-drop__label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .file-drop__sub {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--text-dim);
+    }
+
+    .file-drop__selected {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent-green);
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* ── Consent ─────────────────────────────────────────── */
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .consent-row input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: var(--accent-green);
+      cursor: pointer;
+    }
+
+    .consent-row label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      cursor: pointer;
+    }
+
+    /* ── Submit Row ──────────────────────────────────────── */
+    .submit-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-submit {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.875rem 1.5rem;
+      background: var(--accent-green);
+      color: #000;
+      border: 2px solid #000;
+      box-shadow: 4px 4px 0 #000, inset 1px 1px 0 rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    .btn-submit:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .btn-cancel {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.875rem 1.25rem;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.15s ease;
+    }
+
+    .btn-cancel:hover {
+      color: var(--text-primary);
+      border-color: var(--text-muted);
+    }
+
+    /* ── Success State ───────────────────────────────────── */
+    .success-overlay {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .success-overlay.active {
+      display: flex;
+    }
+
+    .success-icon {
+      font-family: var(--font-vt);
+      font-size: 4rem;
+      color: var(--accent-green);
+      text-shadow: 0 0 20px var(--accent-green);
+      line-height: 1;
+    }
+
+    .success-title {
+      font-family: var(--font-pixel);
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .success-msg {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 36ch;
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .submit-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .submit-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(57, 255, 20, 0.15);
+        padding-bottom: 2rem;
+      }
+
+      .submit-left {
+        padding: 2.5rem 1.5rem 2rem;
+      }
+
+      .submit-right {
+        padding: 2rem 1.5rem 3rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .type-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .type-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .submit-row {
+        flex-direction: column;
+      }
+
+      .btn-submit,
+      .btn-cancel {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="scroll-progress"></div>
+
+  <!-- HEADER -->
+  <header id="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/fyourfeelingslogo.png" alt="F Your Feelings Podcast Logo">
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#hero">Latest</a>
+        <a href="index.html#manifesto">About</a>
+        <a href="index.html#episodes">Episodes</a>
+        <a href="index.html#clips">Clips</a>
+        <a href="submit-story.html">Submit Story</a>
+        <a href="index.html#community" class="nav-cta">Join Us</a>
+      </nav>
+      <button class="nav-hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer">
+    <button class="nav-close">&times;</button>
+    <a href="index.html#hero">Latest</a>
+    <a href="index.html#manifesto">About</a>
+    <a href="index.html#episodes">Episodes</a>
+    <a href="index.html#clips">Clips</a>
+    <a href="submit-story.html">Submit Story</a>
+    <a href="index.html#community">Join Us</a>
+  </div>
+
+  <!-- MAIN: Full-bleed hero + form merged -->
+  <div class="submit-page">
+    <div class="container submit-inner">
+
+      <!-- LEFT: Hook copy -->
+      <div class="submit-left">
+        <div class="submit-eyebrow">YOUR TURN</div>
+        <h1 class="submit-headline">GOT SOMETHING<br>TO <em>GET OFF<br>YOUR CHEST?</em></h1>
+        <p class="submit-desc">
+          A confession. A rant. A story you've never told anyone.
+          We say what people are thinking but won't say out loud —
+          and that includes <em>you</em>. Submit your story and it might
+          get featured on the show.
+        </p>
+        <div class="submit-perks">
+          <div class="submit-perk">
+            <div class="submit-perk__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 15c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V6zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-2.08c3.39-.49 6-3.39 6-6.92h-2z" />
+              </svg></div>
+            <span>Record directly in your browser — no app needed</span>
+          </div>
+          <div class="submit-perk">
+            <div class="submit-perk__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+              </svg></div>
+            <span>Stay anonymous if you want. We don't judge.</span>
+          </div>
+          <div class="submit-perk">
+            <div class="submit-perk__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+              </svg></div>
+            <span>Best stories get featured on the actual episode</span>
+          </div>
+          <div class="submit-perk">
+            <div class="submit-perk__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+              </svg></div>
+            <span>We edit for air — your name / voice can be changed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="submit-right">
+        <div class="form-title">&gt;&gt; STORY SUBMISSION FORM</div>
+
+        <form id="story-form" name="story-submission" method="POST" data-netlify="true" enctype="multipart/form-data">
+          <input type="hidden" name="form-name" value="story-submission">
+
+          <!-- Name + Email -->
+          <div class="form-row">
+            <div class="fg">
+              <label for="name">Name (optional / anonymous OK)</label>
+              <input type="text" id="name" name="name" placeholder="Your name or leave blank">
+            </div>
+            <div class="fg">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+          </div>
+
+          <!-- Story Title -->
+          <div class="fg">
+            <label for="story-title">Give Your Story a Title *</label>
+            <input type="text" id="story-title" name="story-title" placeholder="The catchier the better..." required>
+          </div>
+
+          <!-- Submission Type Tabs -->
+          <div class="fg">
+            <label>How Are You Submitting? *</label>
+            <div class="type-tabs" role="tablist">
+              <button type="button" class="type-tab active" data-type="record" role="tab" aria-selected="true">
+                <span class="type-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12 15c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V6zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-2.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                  </svg></span>
+                RECORD
+              </button>
+              <button type="button" class="type-tab" data-type="upload" role="tab">
+                <span class="type-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+                  </svg></span>
+                UPLOAD
+              </button>
+              <button type="button" class="type-tab" data-type="text" role="tab">
+                <span class="type-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14 17H4v2h10v-2zm6-8H4v2h16V9zM4 15h16v-2H4v2zM4 5v2h16V5H4z" />
+                  </svg></span>
+                TEXT
+              </button>
+              <button type="button" class="type-tab" data-type="video" role="tab">
+                <span class="type-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+                  </svg></span>
+                VIDEO
+              </button>
+            </div>
+            <input type="hidden" name="submission-type" id="submission-type-input" value="record">
+          </div>
+
+          <!-- RECORD PANEL -->
+          <div class="type-panel active" id="panel-record">
+            <div class="record-ui">
+              <canvas class="waveform-canvas" id="waveform-canvas"></canvas>
+              <div class="record-timer" id="record-timer">00:00</div>
+              <div class="record-controls">
+                <button type="button" class="btn-record" id="record-btn">
+                  <span id="record-btn-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <circle cx="12" cy="12" r="8" />
+                    </svg></span>
+                  <span id="record-btn-text">START RECORDING</span>
+                </button>
+                <button type="button" class="btn-record-discard" id="discard-btn"><svg width="12" height="12"
+                    viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px">
+                    <path
+                      d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                  </svg> DISCARD</button>
+              </div>
+              <audio class="record-playback" id="record-playback" controls></audio>
+              <div class="record-status" id="record-status">Click START to record using your microphone</div>
+            </div>
+            <input type="hidden" id="audio-data" name="recording-data">
+          </div>
+
+          <!-- UPLOAD PANEL -->
+          <div class="type-panel" id="panel-upload">
+            <div class="file-drop" id="file-drop">
+              <input type="file" id="audio-file" name="audio-file" accept=".mp3,.wav,.m4a,audio/*">
+              <div class="file-drop__icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"
+                  style="color:var(--text-dim)">
+                  <path
+                    d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" />
+                </svg></div>
+              <div class="file-drop__label">Drop your audio file here</div>
+              <div class="file-drop__sub">MP3, WAV, M4A — max 10MB</div>
+              <div class="file-drop__selected" id="file-selected"></div>
+            </div>
+          </div>
+
+          <!-- TEXT PANEL -->
+          <div class="type-panel" id="panel-text">
+            <div class="fg" style="margin-bottom:0;">
+              <textarea id="story-text-area" name="story-text"
+                placeholder="Tell us your story... let it out. No filters here. Max 5000 characters." maxlength="5000"
+                style="min-height:140px;"></textarea>
+              <div class="char-counter" id="char-counter">0 / 5000</div>
+            </div>
+          </div>
+
+          <!-- VIDEO PANEL -->
+          <div class="type-panel" id="panel-video">
+            <div class="fg" style="margin-bottom:0;">
+              <label for="video-url">YouTube or Video Link</label>
+              <input type="url" id="video-url" name="video-url" placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+          </div>
+
+          <!-- Brief context (always visible) -->
+          <div class="fg" style="margin-top:1.1rem;">
+            <label for="story-context">Give us some context (1–3 sentences) *</label>
+            <textarea id="story-context" name="story-context"
+              placeholder="What's the short version? Why should we feature this?" maxlength="500" required
+              style="min-height:70px;"></textarea>
+            <div class="char-counter" id="context-counter">0 / 500</div>
+          </div>
+
+          <!-- Consent -->
+          <div class="consent-row">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">
+              I understand my story may be edited and featured on the F Your Feelings podcast.
+              My name / voice may be changed to protect anonymity if requested.
+            </label>
+          </div>
+
+          <!-- Actions -->
+          <div class="submit-row">
+            <button type="submit" class="btn-submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
+                <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+              </svg>
+              SUBMIT YOUR STORY
+            </button>
+            <a href="index.html" class="btn-cancel">CANCEL</a>
+          </div>
+        </form>
+
+        <!-- Success message (hidden until submit) -->
+        <div class="success-overlay" id="success-overlay">
+          <div class="success-icon"><svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg></div>
+          <div class="success-title">STORY RECEIVED.<br>WE GOT YOU.</div>
+          <p class="success-msg">
+            We'll review your submission and reach out if we want to feature it on the show.
+            Keep listening — you might hear yourself on air.
+          </p>
+          <a href="index.html" class="btn-primary" style="margin-top:0.5rem;">← BACK TO HOME</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand-side">
+          <div class="footer-brand">
+            <img src="images/fyourfeelingslogo.png" alt="Logo">
+            <span class="footer-brand-name">F YOUR FEELINGS</span>
+          </div>
+          <p class="footer-tagline">We say what you're thinking but shouldn't say out loud. Every week.</p>
+        </div>
+        <div class="footer-social">
+          <a href="https://youtube.com/@fyourfeelingspod" target="_blank" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg>
+          </a>
+          <a href="https://instagram.com/fyourfeelingspod" target="_blank" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+          <a href="https://facebook.com/fyourfeelingspod" target="_blank" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 F Your Feelings Podcast. All rights reserved.</p>
+        <a href="https://anchor.fm/s/108379980/podcast/rss" class="footer-rss">RSS FEED</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Nav ────────────────────────────────────────────────
+    const header = document.getElementById('site-header');
+    const hamburger = document.querySelector('.nav-hamburger');
+    const drawer = document.querySelector('.nav-drawer');
+    const closeBtn = document.querySelector('.nav-close');
+
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('scroll-progress').style.width = ((winScroll / height) * 100) + '%';
+    });
+
+    hamburger?.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      drawer.classList.toggle('open');
+    });
+
+    closeBtn?.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
+    });
+
+    document.querySelectorAll('.nav-drawer a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+      });
+    });
+
+    // ── Submission Type Tabs ───────────────────────────────
+    const tabs = document.querySelectorAll('.type-tab');
+    const panels = document.querySelectorAll('.type-panel');
+    const typeInput = document.getElementById('submission-type-input');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const type = tab.dataset.type;
+        typeInput.value = type;
+        document.getElementById(`panel-${type}`)?.classList.add('active');
+      });
+    });
+
+    // ── Char counters ──────────────────────────────────────
+    function bindCounter(textareaId, counterId, max) {
+      const ta = document.getElementById(textareaId);
+      const counter = document.getElementById(counterId);
+      if (!ta || !counter) return;
+      ta.addEventListener('input', () => {
+        const len = ta.value.length;
+        counter.textContent = `${len} / ${max}`;
+        counter.className = 'char-counter' + (len >= max ? ' max' : len >= max * 0.8 ? ' warn' : '');
+      });
+    }
+    bindCounter('story-text-area', 'char-counter', 5000);
+    bindCounter('story-context', 'context-counter', 500);
+
+    // ── File Drop ──────────────────────────────────────────
+    const fileDrop = document.getElementById('file-drop');
+    const fileInput = document.getElementById('audio-file');
+    const fileSelected = document.getElementById('file-selected');
+
+    ['dragenter', 'dragover'].forEach(e => fileDrop?.addEventListener(e, (ev) => { ev.preventDefault(); fileDrop.classList.add('drag-over'); }));
+    ['dragleave', 'drop'].forEach(e => fileDrop?.addEventListener(e, () => fileDrop.classList.remove('drag-over')));
+    fileDrop?.addEventListener('drop', (e) => {
+      const file = e.dataTransfer.files[0];
+      if (file) showFile(file);
+    });
+    fileInput?.addEventListener('change', () => { if (fileInput.files[0]) showFile(fileInput.files[0]); });
+
+    function showFile(file) {
+      fileSelected.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;vertical-align:middle"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
+      fileSelected.style.display = 'block';
+    }
+
+    // ── Audio Recorder ─────────────────────────────────────
+    let mediaRecorder, audioChunks = [], recordInterval, recordSeconds = 0;
+    let analyser, animFrame;
+    const recordBtn = document.getElementById('record-btn');
+    const recordBtnIcon = document.getElementById('record-btn-icon');
+    const recordBtnText = document.getElementById('record-btn-text');
+    const discardBtn = document.getElementById('discard-btn');
+    const recordTimer = document.getElementById('record-timer');
+    const recordStatus = document.getElementById('record-status');
+    const recordPlayback = document.getElementById('record-playback');
+    const audioData = document.getElementById('audio-data');
+    const canvas = document.getElementById('waveform-canvas');
+    const ctx = canvas?.getContext('2d');
+    let isRecording = false;
+    let hasRecording = false;
+
+    function formatTime(s) {
+      return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    }
+
+    function drawWaveform() {
+      if (!analyser || !ctx) return;
+      const bufLen = analyser.frequencyBinCount;
+      const data = new Uint8Array(bufLen);
+      analyser.getByteTimeDomainData(data);
+      const W = canvas.width, H = canvas.height;
+      ctx.fillStyle = '#111';
+      ctx.fillRect(0, 0, W, H);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#39ff14';
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = '#39ff14';
+      ctx.beginPath();
+      const sliceWidth = W / bufLen;
+      let x = 0;
+      for (let i = 0; i < bufLen; i++) {
+        const v = data[i] / 128;
+        const y = (v * H) / 2;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        x += sliceWidth;
+      }
+      ctx.lineTo(W, H / 2);
+      ctx.stroke();
+      animFrame = requestAnimationFrame(drawWaveform);
+    }
+
+    recordBtn?.addEventListener('click', async () => {
+      if (!isRecording && !hasRecording) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 256;
+          audioCtx.createMediaStreamSource(stream).connect(analyser);
+
+          // Mobile (iOS/Android) robustness: Detect best supported mime type
+          const mimeTypes = ['audio/mp4', 'audio/webm', 'audio/ogg', 'audio/wav'];
+          let supportedType = '';
+          for (const type of mimeTypes) {
+            if (MediaRecorder.isTypeSupported(type)) {
+              supportedType = type;
+              break;
+            }
+          }
+
+          mediaRecorder = new MediaRecorder(stream, supportedType ? { mimeType: supportedType } : {});
+          audioChunks = [];
+          mediaRecorder.ondataavailable = e => {
+            if (e.data.size > 0) audioChunks.push(e.data);
+          };
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(audioChunks, { type: supportedType || 'audio/webm' });
+            recordPlayback.src = URL.createObjectURL(blob);
+            recordPlayback.style.display = 'block';
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => { audioData.value = reader.result; };
+          };
+
+          mediaRecorder.start(1000); // chunk every second for better reliability
+          isRecording = true;
+          recordSeconds = 0;
+          recordInterval = setInterval(() => { recordSeconds++; recordTimer.textContent = formatTime(recordSeconds); }, 1000);
+
+          // Update UI
+          recordBtn.classList.add('recording');
+          recordBtnIcon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16"/></svg>';
+          recordBtnText.textContent = 'STOP';
+          recordTimer.classList.add('active');
+          canvas.classList.add('active');
+          canvas.width = canvas.offsetWidth;
+          canvas.height = 48;
+          recordStatus.textContent = 'Recording… click STOP when done.';
+          drawWaveform();
+        } catch (err) {
+          recordStatus.textContent = '⚠ Interaction required or Mic denied. Tap again.';
+          console.error('Recording Error:', err);
+        }
+      } else if (isRecording) {
+        cancelAnimationFrame(animFrame);
+        clearInterval(recordInterval);
+        mediaRecorder.stop();
+        mediaRecorder.stream.getTracks().forEach(t => t.stop());
+        isRecording = false;
+        hasRecording = true;
+
+        recordBtn.classList.remove('recording');
+        recordBtnIcon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>';
+        recordBtnText.textContent = 'RE-RECORD';
+        canvas.classList.remove('active');
+        discardBtn.style.display = 'inline-flex';
+        recordStatus.textContent = `Recording saved (${formatTime(recordSeconds)}). Listen back below.`;
+        recordPlayback.style.display = 'block';
+      } else if (hasRecording) {
+        // Re-record
+        hasRecording = false;
+        audioData.value = '';
+        recordPlayback.src = '';
+        recordPlayback.style.display = 'none';
+        discardBtn.style.display = 'none';
+        recordTimer.textContent = '00:00';
+        recordTimer.classList.remove('active');
+        recordBtnText.textContent = 'START RECORDING';
+        recordBtnIcon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>';
+        recordStatus.textContent = 'Click START to record using your microphone';
+        recordBtn.click(); // auto-start new recording
+      }
+    });
+
+    discardBtn?.addEventListener('click', () => {
+      hasRecording = false;
+      audioData.value = '';
+      recordPlayback.src = '';
+      recordPlayback.style.display = 'none';
+      discardBtn.style.display = 'none';
+      recordTimer.textContent = '00:00';
+      recordTimer.classList.remove('active');
+      recordBtnIcon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>';
+      recordBtnText.textContent = 'START RECORDING';
+      recordStatus.textContent = 'Click START to record using your microphone';
+    });
+
+    // ── Form Submit ────────────────────────────────────────
+    document.getElementById('story-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.btn-submit');
+      btn.textContent = 'TRANSMITTING...';
+      btn.disabled = true;
+
+      try {
+        const data = new FormData(form);
+        await fetch('/', { method: 'POST', body: data });
+
+        form.style.display = 'none';
+        document.getElementById('success-overlay').classList.add('active');
+      } catch (err) {
+        btn.textContent = 'SUBMIT YOUR STORY';
+        btn.disabled = false;
+        alert('Submission failed. Please try again.');
+      }
+    });
+  </script>
+</body>
+
+</html>

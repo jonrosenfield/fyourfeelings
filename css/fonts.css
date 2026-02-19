@@ -1,0 +1,11 @@
+/*
+ * fonts.css — Self-hosted font declarations
+ * Fonts are loaded from Google Fonts CDN with font-display: swap
+ * for performance. Replace with local WOFF2 files if self-hosting.
+ */
+
+/* Space Mono — monospace, used for headers/UI */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Inter — sans-serif, used for body text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');

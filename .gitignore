@@ -1,0 +1,14 @@
+# Local development
+.DS_Store
+.vscode/
+.claude/
+.tempmediaStorage/
+
+# Debug and temporary files
+rss_debug.xml
+BUILD_SUMMARY.md
+
+# Large assets (if any)
+*.mp4
+*.wav
+*.webm

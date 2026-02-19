@@ -1,0 +1,70 @@
+# Netlify Configuration for F Your Feelings Podcast
+# Neo-Brutalist Dial-Up Delight Edition
+
+[build]
+  publish = "."
+  command = ""  # Static site, no build step needed
+
+# Form handling
+[build.environment]
+  NETLIFY_FORMS_ENABLED = "true"
+
+# Redirects
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security & performance
+[[headers]]
+  for = "/"
+    [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Permissions-Policy = "geolocation=(), microphone=(self), camera=()"
+
+# Cache long-lived assets
+[[headers]]
+  for = "/images/*"
+    [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+    [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+    [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Don't cache HTML
+[[headers]]
+  for = "/*.html"
+    [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Form submission
+[[redirects]]
+  from = "/submit-story"
+  to = "/submit-story.html"
+  status = 200
+
+[[redirects]]
+  from = "/submit"
+  to = "/submit-story.html"
+  status = 200
+
+# Canonical redirects
+[[redirects]]
+  from = "/index"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
