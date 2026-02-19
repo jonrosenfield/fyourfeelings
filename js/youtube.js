@@ -138,7 +138,7 @@ const FyfYouTube = (() => {
 
   function renderShortCard(short) {
     return `
-            <div class="clip-card" onclick="FyfYouTube.openModal('${short.videoId}')" style="cursor:pointer">
+            <div class="clip-card" data-video-id="${short.videoId}">
                 <div class="clip-card__media">
                     <img src="${short.thumbnail}" class="clip-card__thumbnail" alt="${FyfRSS.escapeHtml(short.title)}" loading="lazy">
                     <div class="clip-card__play-btn">
@@ -201,6 +201,44 @@ const FyfYouTube = (() => {
     if (shorts && shorts.length > 0) {
       container.innerHTML = shorts.map(renderShortCard).join('');
       console.log(`[FYF YT] Successfully rendered ${shorts.length} items core.`);
+
+      // Touch-aware click handling — only open modal on taps, not swipes
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+      const SWIPE_THRESHOLD = 10; // px of movement before it's a swipe, not a tap
+
+      container.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive: true });
+
+      container.addEventListener('touchend', (e) => {
+        const touch = e.changedTouches[0];
+        const dx = Math.abs(touch.clientX - touchStartX);
+        const dy = Math.abs(touch.clientY - touchStartY);
+        const dt = Date.now() - touchStartTime;
+
+        // Only treat as tap if minimal movement and short duration
+        if (dx < SWIPE_THRESHOLD && dy < SWIPE_THRESHOLD && dt < 400) {
+          const card = touch.target.closest('.clip-card');
+          if (card?.dataset.videoId) {
+            openModal(card.dataset.videoId);
+          }
+        }
+      }, { passive: true });
+
+      // Desktop click fallback (mouse users)
+      container.addEventListener('click', (e) => {
+        // Ignore if this was a touch event (already handled above)
+        if (e.sourceCapabilities?.firesTouchEvents) return;
+        const card = e.target.closest('.clip-card');
+        if (card?.dataset.videoId) {
+          openModal(card.dataset.videoId);
+        }
+      });
+
     } else {
       container.innerHTML = '<p style="color:var(--text-muted);font-family:var(--font-mono);padding:2rem;">>> NO CLIPS DETECTED</p>';
     }

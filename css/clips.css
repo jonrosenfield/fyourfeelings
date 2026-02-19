@@ -139,6 +139,8 @@
         /* Hide scrollbar on mobile — swipe is the interaction */
         scrollbar-width: none;
         -ms-overflow-style: none;
+        /* Tell browser horizontal swipe = scroll, not gesture */
+        touch-action: pan-x;
     }
 
     .clips-scroll::-webkit-scrollbar {
@@ -150,6 +152,8 @@
         flex: 0 0 72vw;
         max-width: 280px;
         scroll-snap-align: center;
+        /* Allow horizontal swipe to pass through to scroll container */
+        touch-action: pan-x;
     }
 
     /* Play button always visible on touch (no hover state) */
