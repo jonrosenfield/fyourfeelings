@@ -2003,14 +2003,22 @@ body.is-scrollytelling {
     --gutter: 1.25rem;
   }
 
-  /* Fix scroll hint overlap on mobile */
+  /* Fix scroll hint overlap on mobile - prevent flex squeezing */
+  #hero {
+    display: block;
+    height: auto;
+    min-height: 100svh;
+    padding-bottom: 4rem;
+  }
+
   .hero-scroll-hint {
     position: relative;
     bottom: auto;
     left: auto;
     transform: none;
-    margin-top: 2rem;
+    margin: 2rem auto 0;
     padding-bottom: 2rem;
+    width: fit-content;
   }
 
   .nav-links {
