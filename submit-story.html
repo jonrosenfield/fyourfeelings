@@ -1136,9 +1136,24 @@
             const blob = new Blob(audioChunks, { type: supportedType || 'audio/webm' });
             recordPlayback.src = URL.createObjectURL(blob);
             recordPlayback.style.display = 'block';
-            const reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = () => { audioData.value = reader.result; };
+
+            // Convert to file and assign to audio-file input so Netlify uploads it as a physical file
+            let ext = 'webm';
+            if (supportedType) {
+              const typePart = supportedType.split('/')[1];
+              if (typePart) {
+                ext = typePart.split(';')[0];
+              }
+            }
+            const fileName = `fyf-recording-${Date.now()}.${ext}`;
+            const audioFile = new File([blob], fileName, { type: supportedType || 'audio/webm' });
+
+            const dt = new DataTransfer();
+            dt.items.add(audioFile);
+            document.getElementById('audio-file').files = dt.files;
+
+            // Clear any old hidden data
+            if (audioData) audioData.value = '';
           };
 
           mediaRecorder.start(1000); // chunk every second for better reliability
@@ -1179,6 +1194,9 @@
         // Re-record
         hasRecording = false;
         audioData.value = '';
+        document.getElementById('audio-file').value = '';
+        const fileSelected = document.getElementById('file-selected');
+        if (fileSelected) fileSelected.style.display = 'none';
         recordPlayback.src = '';
         recordPlayback.style.display = 'none';
         discardBtn.style.display = 'none';
@@ -1194,6 +1212,9 @@
     discardBtn?.addEventListener('click', () => {
       hasRecording = false;
       audioData.value = '';
+      document.getElementById('audio-file').value = '';
+      const fileSelected = document.getElementById('file-selected');
+      if (fileSelected) fileSelected.style.display = 'none';
       recordPlayback.src = '';
       recordPlayback.style.display = 'none';
       discardBtn.style.display = 'none';
