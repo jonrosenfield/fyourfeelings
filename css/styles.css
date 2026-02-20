@@ -710,10 +710,6 @@ body::after {
 }
 
 .hero-scroll-hint {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -721,6 +717,8 @@ body::after {
   z-index: 2;
   opacity: 0.5;
   animation: scroll-bounce 2s ease-in-out infinite;
+  margin-top: 3rem;
+  /* Push it down from latest drop */
 }
 
 .hero-scroll-hint span {
