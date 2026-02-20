@@ -1959,7 +1959,7 @@ body::after {
 
 /* ── SCROLLYTELLING ──────────────────────────────────────── */
 body.is-scrollytelling {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ── 404 PAGE ────────────────────────────────────────────── */
