@@ -1160,7 +1160,7 @@ body::after {
 /* ── CLIPS ZONE ──────────────────────────────────────────── */
 #clips {
   background: var(--bg-surface);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .clips-intro {
