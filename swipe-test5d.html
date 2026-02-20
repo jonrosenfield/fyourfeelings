@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test 5D — Add header + scroll progress + nav drawer</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/clips.css">
+</head>
+<body class="is-scrollytelling">
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress" style="width:30%"></div>
+
+<!-- HEADER -->
+<header id="site-header" class="site-header">
+    <div class="header-inner">
+        <a href="#" class="logo">TEST 5D</a>
+    </div>
+</header>
+
+<!-- NAV DRAWER (closed) -->
+<nav class="nav-drawer">
+    <button class="nav-close">&times;</button>
+    <a href="#">Link</a>
+</nav>
+
+<div style="height:200vh; display:flex; align-items:center; justify-content:center;">
+    <h2 style="font-family:monospace;color:#39ff14;">5D — Header + nav + progress bar. Scroll down.</h2>
+</div>
+
+<section id="clips" class="section">
+    <div class="container">
+        <div class="clips-scroll">
+            <div class="clip-card" data-video-id="a">
+                <div class="clip-card__media" style="background-image:url('https://i.ytimg.com/vi/Bv1RVmfe_E0/hqdefault.jpg')">
+                    <div class="clip-card__play-btn"><svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                </div>
+                <div class="clip-card__body"><div class="clip-card__label">SHORTS</div><h3 class="clip-card__title">Card 1</h3></div>
+            </div>
+            <div class="clip-card" data-video-id="b">
+                <div class="clip-card__media" style="background-image:url('https://i.ytimg.com/vi/JW41kIP605M/hqdefault.jpg')">
+                    <div class="clip-card__play-btn"><svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                </div>
+                <div class="clip-card__body"><div class="clip-card__label">SHORTS</div><h3 class="clip-card__title">Card 2</h3></div>
+            </div>
+            <div class="clip-card" data-video-id="c">
+                <div class="clip-card__media" style="background-image:url('https://i.ytimg.com/vi/hbrdMRAUWxI/hqdefault.jpg')">
+                    <div class="clip-card__play-btn"><svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                </div>
+                <div class="clip-card__body"><div class="clip-card__label">SHORTS</div><h3 class="clip-card__title">Card 3</h3></div>
+            </div>
+            <div class="clip-card" data-video-id="d">
+                <div class="clip-card__media" style="background-image:url('https://i.ytimg.com/vi/S2lBAWdKyUU/hqdefault.jpg')">
+                    <div class="clip-card__play-btn"><svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                </div>
+                <div class="clip-card__body"><div class="clip-card__label">SHORTS</div><h3 class="clip-card__title">Card 4</h3></div>
+            </div>
+            <div class="clip-card" data-video-id="e">
+                <div class="clip-card__media" style="background-image:url('https://i.ytimg.com/vi/dOzD-uilVk0/hqdefault.jpg')">
+                    <div class="clip-card__play-btn"><svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                </div>
+                <div class="clip-card__body"><div class="clip-card__label">SHORTS</div><h3 class="clip-card__title">Card 5</h3></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div style="height:100vh;"></div>
+</body>
+</html>
