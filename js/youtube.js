@@ -9,7 +9,36 @@ const FyfYouTube = (() => {
   const PROXY_URL = '/api/yt';
 
   const FALLBACK_SHORTS = [
-    // ... (omitting for brevity in thought, but tool will use full content)
+    {
+      videoId: 'ZM_UfOjXy4Y',
+      title: "People Are Into Getting Eaten WHOLE #crazy #podcast #mindblown",
+      thumbnail: 'https://i.ytimg.com/vi/ZM_UfOjXy4Y/hqdefault.jpg',
+      link: 'https://www.youtube.com/shorts/ZM_UfOjXy4Y'
+    },
+    {
+      videoId: '-Wr29a5P2PE',
+      title: "Why Powerful People CRAVE Being Dominated #psychology #shorts",
+      thumbnail: 'https://i.ytimg.com/vi/-Wr29a5P2PE/hqdefault.jpg',
+      link: 'https://www.youtube.com/shorts/-Wr29a5P2PE'
+    },
+    {
+      videoId: 'PbkS1Rr68mc',
+      title: "Dan Marino starts podcast war",
+      thumbnail: 'https://i.ytimg.com/vi/PbkS1Rr68mc/hqdefault.jpg',
+      link: 'https://www.youtube.com/shorts/PbkS1Rr68mc'
+    },
+    {
+      videoId: '-A6afvRGz9Y',
+      title: "The Addiction Nobody Talks About #smartphone #nostalgia #shorts",
+      thumbnail: 'https://i.ytimg.com/vi/-A6afvRGz9Y/hqdefault.jpg',
+      link: 'https://www.youtube.com/shorts/-A6afvRGz9Y'
+    },
+    {
+      videoId: '2lkKdEy1sNw',
+      title: "Trump's McDonald’s Caviar Diet",
+      thumbnail: 'https://i.ytimg.com/vi/2lkKdEy1sNw/hqdefault.jpg',
+      link: 'https://www.youtube.com/shorts/2lkKdEy1sNw'
+    },
     {
       videoId: 'Bv1RVmfe_E0',
       title: "Ski Jumpers Were Injecting Themselves for Olympic Gold",
@@ -27,67 +56,13 @@ const FyfYouTube = (() => {
       title: "This Ad is Absolutely Insane",
       thumbnail: 'https://i.ytimg.com/vi/hbrdMRAUWxI/hqdefault.jpg',
       link: 'https://www.youtube.com/shorts/hbrdMRAUWxI'
-    },
-    {
-      videoId: 'S2lBAWdKyUU',
-      title: "Will Jordan Be Forgotten? NBA’s 1000 Year Future",
-      thumbnail: 'https://i.ytimg.com/vi/S2lBAWdKyUU/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/S2lBAWdKyUU'
-    },
-    {
-      videoId: 'dOzD-uilVk0',
-      title: "A Rare Winter Malfunction: Tweaker Geographic",
-      thumbnail: 'https://i.ytimg.com/vi/dOzD-uilVk0/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/dOzD-uilVk0'
-    },
-    {
-      videoId: 'AKnSr0tIFEQ',
-      title: "The #1 Relationship Deal Breaker?",
-      thumbnail: 'https://i.ytimg.com/vi/AKnSr0tIFEQ/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/AKnSr0tIFEQ'
-    },
-    {
-      videoId: 'RAKZw2aNOFA',
-      title: "Mansplaining vs. Shelaborating: Which is Worse?",
-      thumbnail: 'https://i.ytimg.com/vi/RAKZw2aNOFA/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/RAKZw2aNOFA'
-    },
-    {
-      videoId: 'xUD1nWat8MA',
-      title: "Real or AI? The Glitch That Fooled Us",
-      thumbnail: 'https://i.ytimg.com/vi/xUD1nWat8MA/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/xUD1nWat8MA'
-    },
-    {
-      videoId: 'IZU2t4o09fA',
-      title: "Your Face Is Being Scanned: The Death of Anonymity",
-      thumbnail: 'https://i.ytimg.com/vi/IZU2t4o09fA/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/IZU2t4o09fA'
-    },
-    {
-      videoId: 'cefT5-hWlgI',
-      title: "Why 1980s Fitness Was Actually Insane",
-      thumbnail: 'https://i.ytimg.com/vi/cefT5-hWlgI/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/cefT5-hWlgI'
-    },
-    {
-      videoId: 'm3qPyA_q44Q',
-      title: "This Commercial Gets Worse Every Second",
-      thumbnail: 'https://i.ytimg.com/vi/m3qPyA_q44Q/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/m3qPyA_q44Q'
-    },
-    {
-      videoId: 'dTpbEu-DaJY',
-      title: "I’m Clearly Not Built For This",
-      thumbnail: 'https://i.ytimg.com/vi/dTpbEu-DaJY/hqdefault.jpg',
-      link: 'https://www.youtube.com/shorts/dTpbEu-DaJY'
     }
   ];
 
   async function getLatestShorts(limit = 15) {
     try {
       console.log('[FYF YT] Fetching via proxy:', PROXY_URL);
-      const response = await fetch(`${PROXY_URL}${encodeURIComponent(RSS_URL)}`);
+      const response = await fetch(PROXY_URL);
       if (!response.ok) throw new Error('Proxy fetch failed');
 
       const xmlText = await response.text();
